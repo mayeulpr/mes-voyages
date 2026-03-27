@@ -1,0 +1,266 @@
+:root {
+  --gold: #C9963A;
+  --text: #2A2018;
+  --white: #FEFCF8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--text);
+}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background:
+    linear-gradient(rgba(10, 46, 82, 0.75), rgba(26, 111, 168, 0.8)),
+    url("https://images.unsplash.com/photo-1501785888041-af3ef285b470");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 20px;
+  overflow: hidden;
+}
+
+/* Conteneur des drapeaux */
+.flags-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Chaque drapeau flottant */
+.flag-item {
+  position: absolute;
+  opacity: 0;
+  animation: floatUp linear infinite;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+
+  10% {
+    opacity: 0.55;
+  }
+
+  90% {
+    opacity: 0.4;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-105vh) translateX(var(--drift)) rotate(20deg);
+  }
+}
+
+/* Overlay léger par-dessus les drapeaux pour garder le texte lisible */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 30, 60, 0.15);
+  pointer-events: none;
+}
+
+/* Contenu hero au-dessus */
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(50px, 8vw, 90px);
+  font-weight: 300;
+}
+
+.hero em {
+  color: var(--gold);
+}
+
+.hero p {
+  margin-top: 15px;
+  opacity: 0.85;
+  font-size: 18px;
+}
+
+/* ── MAP ──────────────────────────────────────────────────────── */
+.map-section {
+  padding: 60px 20px;
+}
+
+#map {
+  height: 420px;
+  max-width: 1100px;
+  margin: auto;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* ── CONTAINER ────────────────────────────────────────────────── */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 60px 20px;
+}
+
+/* ── GRID ─────────────────────────────────────────────────────── */
+.trips {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+}
+
+/* ── CARD ─────────────────────────────────────────────────────── */
+.trip {
+  position: relative;
+  height: 260px;
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  color: white;
+  transform: translateY(40px);
+  opacity: 0;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.trip.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.trip-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.8s ease;
+}
+
+.trip:hover .trip-bg {
+  transform: scale(1.12);
+}
+
+.trip-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+}
+
+.trip-content {
+  position: absolute;
+  bottom: 0;
+  padding: 20px;
+}
+
+.trip h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+}
+
+.trip span {
+  font-size: 12px;
+  color: var(--gold);
+}
+
+/* ── BADGE ────────────────────────────────────────────────────── */
+.trip-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 6px 12px;
+  font-size: 11px;
+  border-radius: 20px;
+}
+
+/* ── FOOTER ───────────────────────────────────────────────────── */
+footer {
+  text-align: center;
+  padding: 40px;
+  font-size: 12px;
+  color: #777;
+}
+
+/* ── EXTRA SECTION ───────────────────────────────────────────── */
+.extra-section {
+  max-width: 1100px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+}
+
+/* INFOS GRID */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.info-card {
+  background: white;
+  padding: 18px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 14px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+}
+
+/* QUOTE */
+.quote {
+  text-align: center;
+  font-style: italic;
+  color: #666;
+  margin: 40px 0;
+  font-size: 18px;
+}
+
+/* EXPERIENCE */
+.experience {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.experience h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.experience p {
+  max-width: 600px;
+  margin: auto;
+  color: #555;
+}
+
+/* FUN FACT */
+.fun-fact {
+  background: white;
+  padding: 20px;
+  border-left: 4px solid var(--gold);
+  border-radius: 10px;
+  margin-top: 30px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}

@@ -1,0 +1,695 @@
+:root {
+  --gold: #C9963A;
+  --gold-light: #F0D08A;
+  --sand: #F5EDD8;
+  --sand-dark: #E8D9B8;
+  --text: #2A2018;
+  --white: #FEFCF8;
+  --blue: #1A6FA8;
+}
+
+/* RESET */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ── NAVBAR ───────────────────────────────────────────────────── */
+.navbar {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 100;
+}
+
+.nav-home {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 40px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: background 0.3s, border 0.3s;
+}
+
+.nav-home:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.nav-icon {
+  color: var(--gold-light);
+  font-size: 10px;
+}
+
+/* Navbar qui s'adapte quand on scroll hors du hero */
+.navbar.scrolled .nav-home {
+  background: white;
+  border-color: var(--sand-dark);
+  color: var(--text);
+  box-shadow: 0 4px 16px rgba(10, 46, 82, 0.08);
+}
+
+.navbar.scrolled .nav-icon {
+  color: var(--gold);
+}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* Gradient enrichi en 4 couleurs comme le second */
+  background: linear-gradient(160deg, #0a2e52 0%, #0E4D7A 35%, #1A6FA8 65%, #3B8EC0 100%);
+  color: white;
+  padding: 60px 20px 100px;
+  overflow: hidden;
+}
+
+/* Pattern SVG répété en overlay */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 Q36 15 30 20 Q24 15 30 5Z M8 30 Q18 24 20 30 Q18 36 8 30Z M52 30 Q42 24 40 30 Q42 36 52 30Z' fill='%23ffffff08'/%3E%3C/svg%3E") repeat;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Vagues SVG en bas du hero */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,40 C200,80 400,0 600,40 C800,80 1000,0 1200,40 L1200,80 L0,80 Z' fill='%23FEFCF8'/%3E%3C/svg%3E") no-repeat bottom center;
+  background-size: cover;
+  pointer-events: none;
+}
+
+.hero-content {
+  max-width: 700px;
+  position: relative;
+}
+
+/* Animations fadeUp sur les éléments du hero */
+.hero-tag {
+  letter-spacing: 3px;
+  font-size: 12px;
+  color: var(--gold-light);
+  margin-bottom: 20px;
+  animation: fadeUp 0.8s ease both;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(48px, 8vw, 80px);
+  font-weight: 300;
+  line-height: 1.1;
+  animation: fadeUp 0.8s 0.15s ease both;
+}
+
+.hero-title em {
+  color: var(--gold-light);
+}
+
+.hero-desc {
+  margin-top: 20px;
+  opacity: 0.8;
+  animation: fadeUp 0.8s 0.3s ease both;
+}
+
+.hero-dates {
+  margin-top: 20px;
+  animation: fadeUp 0.8s 0.45s ease both;
+}
+
+/* Indicateur de scroll animé */
+.hero-scroll {
+  position: absolute;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: fadeUp 1s 0.8s ease both;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.4));
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 80px 20px;
+}
+
+/* TITRES */
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 300;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+/* CARDS */
+.days-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.day-card {
+  display: block;
+  background: white;
+  border: 1px solid var(--sand-dark);
+  border-radius: 14px;
+  padding: 30px;
+  text-decoration: none;
+  color: inherit;
+  transition: 0.3s;
+}
+
+.day-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.day-number {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.day-route {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  margin-bottom: 16px;
+}
+
+.day-route .arrow {
+  color: var(--gold);
+}
+
+.day-steps {
+  list-style: none;
+  margin-bottom: 15px;
+}
+
+.day-steps li {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.day-tip {
+  margin-top: 10px;
+  background: var(--sand);
+  padding: 12px;
+  border-left: 3px solid var(--gold);
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* ROUTE STRIP */
+.route-strip {
+  background: var(--gold);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: white;
+}
+
+.route-city {
+  white-space: nowrap;
+}
+
+.route-arrow {
+  opacity: 0.65;
+  font-size: 10px;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 40px;
+  font-size: 12px;
+  color: #777;
+}
+
+/* BUTON */
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+
+  color: var(--cream);
+  text-decoration: none;
+
+  background: var(--dark);
+  border: 1px solid rgba(245, 240, 232, 0.15);
+  padding: 12px 18px;
+
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+/* Ligne animée */
+.back-button::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+
+/* Hover */
+.back-button:hover {
+  background: var(--rust);
+  color: var(--cream);
+  transform: translateX(-4px);
+}
+
+.back-button:hover::after {
+  width: 100%;
+}
+
+/* ── ANIMATIONS ───────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scrollPulse {
+
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+}
+
+
+
+/*PAGE LUXEMBOURG*/
+
+.spots-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  padding-bottom: 80px;
+}
+
+.spot-card {
+  min-width: 0;
+  background: white;
+  border: 1px solid var(--sand-dark);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.spot-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(10, 46, 82, 0.12);
+}
+
+.spot-photo {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  cursor: zoom-in;
+  transition: transform 0.4s ease;
+}
+
+.spot-photo:hover {
+  transform: scale(1.03);
+}
+
+.spot-photo-placeholder {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, var(--sand) 0%, var(--sand-dark) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--sand-dark);
+}
+
+.spot-photo-placeholder span {
+  font-size: 32px;
+  opacity: 0.4;
+}
+
+.spot-photo-placeholder p {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0.5;
+  color: #7A6A50;
+}
+
+.spot-body {
+  padding: 20px 22px 22px;
+}
+
+.spot-tag {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.spot-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.spot-desc {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+.spot-tip {
+  background: var(--sand);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 6px 6px 0;
+  padding: 10px 12px;
+  font-size: 12px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.spot-tip::before {
+  content: '✦ ';
+  color: var(--gold);
+}
+
+/* LIGHTBOX */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 20, 40, 0.92);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.lightbox-img {
+  max-width: 88vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+  transform: scale(0.92);
+  transition: transform 0.35s ease;
+}
+
+.lightbox.active .lightbox-img {
+  transform: scale(1);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 28px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.lightbox-close:hover {
+  color: white;
+}
+
+.lightbox-caption {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* INTRO */
+.city-intro {
+  text-align: center;
+  padding: 60px 0 40px;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.city-intro p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(18px, 2.5vw, 22px);
+  font-weight: 300;
+  line-height: 1.8;
+  color: #7A6A50;
+}
+
+.city-intro p strong {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* STATS */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 0 0 50px;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 16px;
+  background: var(--sand);
+  border-radius: 12px;
+  border: 1px solid var(--sand-dark);
+}
+
+.stat-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--blue);
+}
+
+.stat-key {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #7A6A50;
+  margin-top: 4px;
+}
+
+/* FLAG HERO Luxembourg*/
+.hero-flag-bg {
+  background: none !important;
+}
+
+.hero-flag-bg::before,
+.hero-flag-bg::after {
+  display: none;
+}
+
+.flag-bg-lux {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  opacity: 0.35;
+}
+
+.flag-red {
+  flex: 1;
+  background: #EF3340;
+}
+
+.flag-white {
+  flex: 1;
+  background: #FFFFFF;
+}
+
+.flag-blue {
+  flex: 1;
+  background: #00A3E0;
+}
+
+.flag-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(10, 46, 82, 0.55), rgba(14, 77, 122, 0.45));
+  pointer-events: none;
+}
+
+.hero-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  pointer-events: none;
+}
+
+.hero-wave svg {
+  width: 100%;
+  height: 80px;
+  display: block;
+}
+
+
+/* ── FLAG HERO Bruxelles ─────────────────────────────────────── */
+
+.flag-bg-bel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: row;
+  /* ← vertical pour la Belgique, horizontal pour Luxembourg */
+  opacity: 0.35;
+}
+
+.flag-black {
+  flex: 1;
+  background: #1D1D1B;
+}
+
+.flag-yellow {
+  flex: 1;
+  background: #FAD209;
+}
+
+.flag-red {
+  flex: 1;
+  background: #EF3340;
+}
+
+.flag-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(10, 46, 82, 0.55), rgba(14, 77, 122, 0.45));
+  pointer-events: none;
+}
+
+.hero-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  pointer-events: none;
+}
+
+.hero-wave svg {
+  width: 100%;
+  height: 80px;
+  display: block;
+}
+
+.gallery-button {
+  display: inline-block;
+  border: 2px solid var(--gold);
+  padding: 16px 28px;
+  font-size: 14px;
+  border-radius: 12px;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--white);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.gallery-button:hover {
+  background: var(--gold);
+  color: var(--white);
+  transform: translateY(-3px);
+}

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mes Road Trips</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="src/style-accueil.css">
+</head>
+
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <!-- Drapeaux flottants -->
+    <div class="flags-bg" id="flags-bg"></div>
+    <!-- Overlay pour lisibilité -->
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Mes <em>Road Trips</em></h1>
+      <p>Choisis ton itinéraire et pars à l'aventure 🚗</p>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <div class="map-section">
+    <div id="map"></div>
+  </div>
+
+  <!-- INFOS + AMBIANCE -->
+  <section class="extra-section">
+
+    <div class="quote">
+      "Voyager, c’est collectionner des moments, pas des choses."
+    </div>
+
+    <div class="experience">
+      <h2>L'expérience</h2>
+      <p>Prépare ton itinéraire, prends la route et laisse-toi surprendre par les paysages, les rencontres et les
+        imprévus qui rendent chaque voyage unique.</p>
+    </div>
+
+    <div class="fun-fact">
+      💡 Astuce : les meilleurs souvenirs se trouvent souvent hors des sentiers touristiques.
+    </div>
+
+  </section>
+
+  <!-- TRIPS -->
+  <div class="container">
+    <div class="trips">
+      <a href="Luxembourg-Bruxelles/roadtrip1.html" class="trip">
+        <div class="trip-bg"
+          style="background-image:url('image/belgique.avif');"></div>
+        <div class="trip-overlay"></div>
+        <div class="trip-badge">3 JOURS</div>
+        <div class="trip-content">
+          <h2>Luxembourg/Bruxelles 🇱🇺🇧🇪 </h2>
+          <span>1-3 mai 2026</span>
+        </div>
+      </a>
+      <a href="Côte-d'azur/roadtrip2.html" class="trip">
+        <div class="trip-bg"
+          style="background-image:url('image/cote-d\'azur.jpg');"></div>
+        <div class="trip-overlay"></div>
+        <div class="trip-badge">4 JOURS</div>
+        <div class="trip-content">
+          <h2>Côte d'Azur🇫🇷</h2>
+          <span>11-14 juillet 2026</span>
+        </div>
+      </a>
+      <a href="Brésil/roadtrip3.html" class="trip">
+        <div class="trip-bg"
+          style="background-image:url('image/bresil.jpg');"></div>
+        <div class="trip-overlay"></div>
+        <div class="trip-badge">COMING SOON</div>
+        <div class="trip-content">
+          <h2>Brésil🇧🇷</h2>
+          <span>À venir</span>
+        </div>
+      </a>
+      <a href="Polynesie/roadtrip4.html" class="trip">
+        <div class="trip-bg"
+          style="background-image:url('image/polynesie.jpg');"></div>
+        <div class="trip-overlay"></div>
+        <div class="trip-badge">COMMING SOON</div>
+        <div class="trip-content">
+          <h2>Polynésie🇫🇷</h2>
+          <span>À venir</span>
+        </div>
+      </a>
+      <a href="Botswana/roadtrip5.html" class="trip">
+        <div class="trip-bg"
+          style="background-image:url('image/botswana.jpg');"></div>
+        <div class="trip-overlay"></div>
+        <div class="trip-badge">COMING SOON</div>
+        <div class="trip-content">
+          <h2>Botswana🇧🇼</h2>
+          <span>À venir</span>
+        </div>
+      </a>
+      <a href="Australie/roadtrip6.html" class="trip">
+        <div class="trip-bg"
+          style="background-image:url('image/australie.jpeg');"></div>
+        <div class="trip-overlay"></div>
+        <div class="trip-badge">COMING SOON</div>
+        <div class="trip-content">
+          <h2>Australie🇦🇺</h2>
+          <span>À venir</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <footer>© 2026 — Road Trips</footer>
+
+  <!-- Leaflet -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([48.8, 3], 5);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+    const parisTrip = L.polyline([[48.85, 2.35], [49.61, 6.13], [50.85, 4.35]], { color: '#C9963A', weight: 4 }).addTo(map);
+    parisTrip.on('click', () => { window.location.href = "paris.html"; });
+
+    const coteAzur = L.polyline([[43.73, 7.42], [43.7, 7.26], [43.55, 7.02], [43.27, 6.64]], { color: '#1A6FA8', weight: 4 }).addTo(map);
+    coteAzur.on('click', () => { window.location.href = "cotedazur.html"; });
+
+    L.marker([48.85, 2.35]).addTo(map).bindPopup("Paris");
+    L.marker([49.61, 6.13]).addTo(map).bindPopup("Luxembourg");
+    L.marker([50.85, 4.35]).addTo(map).bindPopup("Bruxelles");
+  </script>
+
+  <!-- Animation scroll cards -->
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.trip').forEach(card => observer.observe(card));
+  </script>
+
+  <!-- Drapeaux flottants -->
+  <script>
+    const flags = [
+      '🇫🇷', '🇧🇪', '🇱🇺', '🇩🇪', '🇮🇹', '🇪🇸', '🇵🇹', '🇳🇱', '🇨🇭', '🇦🇹',
+      '🇬🇧', '🇮🇪', '🇵🇱', '🇨🇿', '🇸🇰', '🇭🇺', '🇸🇮', '🇭🇷', '🇷🇸', '🇧🇦',
+      '🇲🇪', '🇦🇱', '🇲🇰', '🇬🇷', '🇧🇬', '🇷🇴', '🇲🇩', '🇺🇦', '🇱🇹', '🇱🇻',
+      '🇪🇪', '🇫🇮', '🇸🇪', '🇳🇴', '🇩🇰', '🇮🇸',
+      '🇹🇷', '🇨🇾', '🇲🇹',
+      '🇺🇸', '🇨🇦', '🇲🇽',
+      '🇧🇷', '🇦🇷', '🇨🇱', '🇨🇴', '🇵🇪',
+      '🇯🇵', '🇨🇳', '🇰🇷', '🇮🇳', '🇹🇭', '🇻🇳', '🇮🇩',
+      '🇦🇺', '🇳🇿',
+      '🇿🇦', '🇲🇦', '🇪🇬', '🇰🇪'
+    ];
+    const container = document.getElementById('flags-bg');
+
+    for (let i = 0; i < 35; i++) {
+      const span = document.createElement('span');
+      span.textContent = flags[Math.floor(Math.random() * flags.length)];
+      span.classList.add('flag-item');
+
+      // Position et taille aléatoires
+      const size = Math.random() * 24 + 18; // entre 18px et 42px
+      const left = Math.random() * 100;
+      const delay = Math.random() * 8;
+      const duration = Math.random() * 10 + 12; // entre 12s et 22s
+      const drift = (Math.random() - 0.5) * 60; // dérive horizontale
+
+      span.style.cssText = `
+    font-size: ${size}px;
+    left: ${left}%;
+    bottom: -60px;
+    animation-delay: ${delay}s;
+    animation-duration: ${duration}s;
+    --drift: ${drift}px;
+  `;
+
+      container.appendChild(span);
+    }
+  </script>
+
+</body>
+
+</html>
